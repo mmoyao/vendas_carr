@@ -23,9 +23,10 @@ if st.button('Criar histograma'):
 st.subheader('Gráfico de Dispersão')
 if st.button('Criar gráfico de dispersão'):
     st.write('Criando um gráfico de dispersão para preço e ano do veículo')
-    fig_scatter = px.scatter(car_data, x='year', y='price', 
-                             title='Preço versus Ano',
-                             labels={'year': 'Ano', 'price': 'Preço'})
+    # Use 'model_year' em vez de 'year'
+    fig_scatter = px.scatter(car_data, x='model_year', y='price', 
+                             title='Preço versus Ano do Modelo',
+                             labels={'model_year': 'Ano do Modelo', 'price': 'Preço'})
     st.plotly_chart(fig_scatter, use_container_width=True)
 
 # Instruções para adicionar novas funcionalidades
