@@ -1,17 +1,32 @@
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-        
-car_data = pd.read_csv('vehicles.csv') # lendo os dados
-hist_button = st.button('Criar histograma') # criar um botão
-st.header('Venda de VeÍculos') # criar um cabeçalho
-        
-if hist_button: # se o botão for clicado
-    # escrever uma mensagem
+
+# Carregar os dados
+car_data = pd.read_csv('vehicles.csv')
+
+# Título do aplicativo
+st.title('Venda de Veículos')
+
+# Exibir o conjunto de dados
+if st.checkbox('Mostrar dados do conjunto de dados'):
+    st.write(car_data)
+
+# Criar botão para histograma
+st.subheader('Histograma do Odômetro')
+if st.button('Criar histograma'):
     st.write('Criando um histograma para o conjunto de dados de anúncios de vendas de carros')
-            
-    # criar um histograma
-    fig = px.histogram(car_data, x="odometer")
-        
-    # exibir um gráfico Plotly interativo
-    st.plotly_chart(fig, use_container_width=True)
+    fig_hist = px.histogram(car_data, x='odometer')
+    st.plotly_chart(fig_hist, use_container_width=True)
+
+# Criar gráfico de dispersão
+st.subheader('Gráfico de Dispersão')
+if st.button('Criar gráfico de dispersão'):
+    st.write('Criando um gráfico de dispersão para preço e ano do veículo')
+    fig_scatter = px.scatter(car_data, x='year', y='price', 
+                             title='Preço versus Ano',
+                             labels={'year': 'Ano', 'price': 'Preço'})
+    st.plotly_chart(fig_scatter, use_container_width=True)
+
+# Instruções para adicionar novas funcionalidades
+st.write("Selecione as opções acima para visualizar os dados e gráficos.")
